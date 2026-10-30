@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Public Cleanliness Reporter | PBL Mini Project</title>
+  <meta name="description" content="Public Cleanliness Reporter - Empowering citizens to report local civic hygiene issues like uncollected garbage, overflowing dustbins, open drains, and stagnant water directly to local authorities." />
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Favicon (Inline SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ==========================================================================
+       Navigation Bar
+       ========================================================================== -->
+  <header class="site-navbar">
+    <div class="container navbar-container">
+      <div class="brand-logo" onclick="navigateToView('landing')">
+        <div class="logo-badge">🌱</div>
+        <div class="brand-text">
+          <div class="brand-title">Public Cleanliness <span>Reporter</span></div>
+          <span class="pbl-tag">PBL Mini Project</span>
+        </div>
+      </div>
+
+      <nav>
+        <ul class="nav-links">
+          <li><button class="nav-btn active" data-view="landing" onclick="navigateToView('landing')">Home</button></li>
+          <li><button class="nav-btn" data-view="reports" onclick="navigateToView('reports')">View Reports</button></li>
+          <li><button class="nav-btn" data-view="admin" onclick="navigateToView('admin')">Admin Portal</button></li>
+          <li>
+            <button class="nav-btn nav-btn-cta" data-nav-target="wizard-start">
+              <span>📢</span> Report Issue
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Toggle navigation">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================== -->
+  <main id="app-main">
+
+    <!-- ======================================================================
+         VIEW 1: LANDING PAGE (Clean-City Hero Background)
+         ====================================================================== -->
+    <section id="view-landing" class="view-section active">
+      <div class="hero-wrapper">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <div class="hero-badge-pill">
+            <span>✨</span> Swachh Bharat & Smart Civic Sanitation
+          </div>
+          <h1 class="hero-title">
+            Public Cleanliness <br />
+            <span class="gradient-text">Reporter</span>
+          </h1>
+          <p class="hero-tagline">
+            Empowering citizens for cleaner, healthier, and greener communities. Spot garbage, overflowing dustbins, or open drains in your village or ward and report directly to local authorities with one click.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn-hero-primary" data-nav-target="wizard-start" id="btn-hero-start">
+              <span>🚀</span> Start Reporting Now
+            </button>
+            <button class="btn-hero-secondary" onclick="navigateToView('reports')">
+              <span>📋</span> Browse Public Reports
+            </button>
+            <button class="btn-hero-secondary" onclick="navigateToView('admin')">
+              <span>🛡️</span> Officer Portal
+            </button>
+          </div>
+
+          <div class="hero-stats-glass">
+            <div class="stat-item">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Transparent Tracking</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">5-Level</div>
+              <div class="stat-label">Granular Location Pin</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">&lt; 24h</div>
+              <div class="stat-label">Sanitation Dispatch</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- How It Works Section -->
+      <section class="landing-info-section">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-kicker">Simple 4-Step Process</div>
+            <h2 class="section-title">How Public Cleanliness Reporter Works</h2>
+            <p class="section-subtitle">
+              A streamlined civic reporting workflow built to connect citizens directly with their local gram panchayat and municipal sanitation officers.
+            </p>
+          </div>
+
+          <div class="steps-grid">
+            <div class="step-card">
+              <div class="step-num">1</div>
+              <div class="step-icon">📍</div>
+              <h3>Pin Your Location</h3>
+              <p>Navigate step-by-step from State down to District, Mandal, and specific Village or municipal ward.</p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-num">2</div>
+              <div class="step-icon">⚠️</div>
+              <h3>Select The Problem</h3>
+              <p>Choose from common hygiene hazards like overflowing dustbins, sewage leaks, or open waste burning.</p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-num">3</div>
+              <div class="step-icon">📸</div>
+              <h3>Add Photo & Details</h3>
+              <p>Upload visual evidence, attach GPS coordinates, and add specific landmark descriptions.</p>
+            </div>
+
+            <div class="step-card">
+              <div class="step-num">4</div>
+              <div class="step-icon">✅</div>
+              <h3>Track Resolution</h3>
+              <p>Receive a unique tracking Report ID and observe real-time status updates from sanitation officers.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 2: REPORTING PORTAL (Single-Page Dropdowns + Village Problem Form)
+         ====================================================================== -->
+    <section id="view-wizard" class="view-section">
+      <!-- Breadcrumb Bar -->
+      <div class="flow-header-bar">
+        <div class="container flow-header-content">
+          <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+            <button type="button" class="btn-back" onclick="navigateToView('landing')">
+              <span>←</span> Back to Home
+            </button>
+            <ul class="breadcrumb-list" id="wizard-breadcrumbs">
+              <li class="breadcrumb-item"><button onclick="navigateToView('landing')">🏠 Home</button></li>
+              <span class="breadcrumb-separator">›</span>
+              <li class="breadcrumb-item active" id="breadcrumb-current-loc">Select Location</li>
+            </ul>
+          </div>
+
+          <div class="location-status-pill" id="location-status-indicator">
+            <span class="status-pulse-dot"></span>
+            <span id="location-status-text">Step 1: Choose State</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="container wizard-container">
+
+        <!-- STEP 1: JURISDICTION SELECTION (4 Connected Dropdowns) -->
+        <div class="location-dropdowns-card">
+          <div class="dropdowns-header">
+            <div class="dropdowns-icon">📍</div>
+            <div>
+              <h2 class="dropdowns-title">Select Your Location</h2>
+              <p class="dropdowns-subtitle">Choose your State, District, Mandal, and Village from the dropdowns below</p>
+            </div>
+          </div>
+
+          <div class="dropdowns-grid">
+            <!-- 1. State Dropdown -->
+            <div class="dropdown-group">
+              <label class="dropdown-label" for="select-state">
+                <span class="dropdown-num">1</span> State <span class="required">*</span>
+              </label>
+              <select id="select-state" class="form-control select-location">
+                <option value="">-- Choose State --</option>
+              </select>
+            </div>
+
+            <!-- 2. District Dropdown -->
+            <div class="dropdown-group">
+              <label class="dropdown-label" for="select-district">
+                <span class="dropdown-num">2</span> District <span class="required">*</span>
+              </label>
+              <select id="select-district" class="form-control select-location" disabled>
+                <option value="">-- Choose State First --</option>
+              </select>
+            </div>
+
+            <!-- 3. Mandal Dropdown -->
+            <div class="dropdown-group">
+              <label class="dropdown-label" for="select-mandal">
+                <span class="dropdown-num">3</span> Mandal / Tehsil <span class="required">*</span>
+              </label>
+              <select id="select-mandal" class="form-control select-location" disabled>
+                <option value="">-- Choose District First --</option>
+              </select>
+            </div>
+
+            <!-- 4. Village Dropdown -->
+            <div class="dropdown-group">
+              <label class="dropdown-label" for="select-village">
+                <span class="dropdown-num">4</span> Village / Ward <span class="required">*</span>
+              </label>
+              <select id="select-village" class="form-control select-location" disabled>
+                <option value="">-- Choose Mandal First --</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Active Location Path Banner -->
+          <div class="active-path-banner" id="active-path-banner" style="display: none;">
+            <div class="path-text">
+              <span>📌 Selected Area:</span>
+              <strong id="path-display-text">Telangana</strong>
+            </div>
+            <button type="button" class="btn-change-loc" onclick="resetDropdowns()">Reset Location</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: PROBLEM QUESTION & REPORTING FORM (Revealed ONLY after selecting Village) -->
+        <div id="problem-reporting-section" style="display: none; margin-top: 2rem;">
+          <div class="form-shell">
+            <div class="question-header">
+              <div class="question-badge-pill">Step 2: Cleanliness Issue</div>
+              <h2 class="question-title">
+                What is the problem in <span class="highlight-village" id="display-selected-village">your village</span>?
+              </h2>
+              <p class="question-subtitle">
+                Select the cleanliness hazard and provide details so the local sanitation crew can be notified immediately.
+              </p>
+            </div>
+
+            <form id="cleanliness-report-form">
+              <!-- Problem Radio Cards Grid -->
+              <div class="form-group">
+                <label class="form-label">
+                  <span>Select Problem Category <span class="required">*</span></span>
+                  <span class="optional">Choose the closest match</span>
+                </label>
+
+                <div class="problem-options-grid">
+                  <!-- Garbage not collected -->
+                  <label class="problem-radio-card">
+                    <input type="radio" name="problemType" value="garbage_not_collected" required />
+                    <div class="problem-card-inner">
+                      <div class="problem-card-top">
+                        <span class="problem-emoji">🗑️</span>
+                        <div class="check-indicator">✓</div>
+                      </div>
+                      <div class="problem-label-text">Garbage not collected</div>
+                      <div class="problem-desc-snippet">Door-to-door or street pile uncollected for days</div>
+                    </div>
+                  </label>
+
+                  <!-- Overflowing dustbin -->
+                  <label class="problem-radio-card">
+                    <input type="radio" name="problemType" value="overflowing_dustbin" />
+                    <div class="problem-card-inner">
+                      <div class="problem-card-top">
+                        <span class="problem-emoji">🚮</span>
+                        <div class="check-indicator">✓</div>
+                      </div>
+                      <div class="problem-label-text">Overflowing dustbin</div>
+                      <div class="problem-desc-snippet">Public bin full and spilling waste onto roads</div>
+                    </div>
+                  </label>
+
+                  <!-- Open drain / sewage blockage -->
+                  <label class="problem-radio-card">
+                    <input type="radio" name="problemType" value="open_drain" />
+                    <div class="problem-card-inner">
+                      <div class="problem-card-top">
+                        <span class="problem-emoji">🚰</span>
+                        <div class="check-indicator">✓</div>
+                      </div>
+                      <div class="problem-label-text">Open drain / sewage blockage</div>
+                      <div class="problem-desc-snippet">Choked gutter, leaking manhole, foul stench</div>
+                    </div>
+                  </label>
+
+                  <!-- Stagnant water / mosquitoes -->
+                  <label class="problem-radio-card">
+                    <input type="radio" name="problemType" value="stagnant_water" />
+                    <div class="problem-card-inner">
+                      <div class="problem-card-top">
+                        <span class="problem-emoji">🦟</span>
+                        <div class="check-indicator">✓</div>
+                      </div>
+                      <div class="problem-label-text">Stagnant water / mosquitoes</div>
+                      <div class="problem-desc-snippet">Water logging in potholes or plots breeding pests</div>
+                    </div>
+                  </label>
+
+                  <!-- Public toilet dirty -->
+                  <label class="problem-radio-card">
+                    <input type="radio" name="problemType" value="public_toilet_dirty" />
+                    <div class="problem-card-inner">
+                      <div class="problem-card-top">
+                        <span class="problem-emoji">🚻</span>
+                        <div class="check-indicator">✓</div>
+                      </div>
+                      <div class="problem-label-text">Public toilet dirty</div>
+                      <div class="problem-desc-snippet">Unsanitary, clogged, or non-functional public lavatory</div>
+                    </div>
+                  </label>
+
+                  <!-- Burning of waste -->
+                  <label class="problem-radio-card">
+                    <input type="radio" name="problemType" value="burning_of_waste" />
+                    <div class="problem-card-inner">
+                      <div class="problem-card-top">
+                        <span class="problem-emoji">🔥</span>
+                        <div class="check-indicator">✓</div>
+                      </div>
+                      <div class="problem-label-text">Burning of waste</div>
+                      <div class="problem-desc-snippet">Open incineration of plastic, leaves, or municipal waste</div>
+                    </div>
+                  </label>
+
+                  <!-- Other with custom text box -->
+                  <label class="problem-radio-card">
+                    <input type="radio" name="problemType" value="other" />
+                    <div class="problem-card-inner">
+                      <div class="problem-card-top">
+                        <span class="problem-emoji">⚠️</span>
+                        <div class="check-indicator">✓</div>
+                      </div>
+                      <div class="problem-label-text">Other Cleanliness Issue</div>
+                      <div class="problem-desc-snippet">Debris, animal carcass, biomedical waste, etc.</div>
+                    </div>
+                  </label>
+                </div>
+
+                <!-- Custom text box revealed when 'Other' selected -->
+                <div class="other-input-container" id="other-problem-container">
+                  <label class="form-label">
+                    <span>Specify Other Cleanliness Problem <span class="required">*</span></span>
+                  </label>
+                  <input type="text" class="form-control" id="other-problem-input" placeholder="e.g. Broken glass bottles near playground / dead tree branches" />
+                </div>
+              </div>
+
+              <!-- Question Description Text Box -->
+              <div class="form-group">
+                <div class="form-label">
+                  <span>Describe The Problem & Exact Landmark <span class="required">*</span></span>
+                  <button type="button" class="btn-change-loc" id="btn-mock-gps" style="font-size: 0.78rem;">
+                    📍 Pin Current GPS
+                  </button>
+                </div>
+                <textarea class="form-control" id="report-description" rows="3" placeholder="Provide specific landmark (e.g. near bus shelter, temple, house #12-4), street name, or how severe the issue is..." required></textarea>
+              </div>
+
+              <!-- Severity Selector -->
+              <div class="form-group">
+                <label class="form-label">
+                  <span>Urgency Level</span>
+                  <span class="optional">Helps prioritize response squad</span>
+                </label>
+                <div class="severity-selector">
+                  <label class="severity-pill-label">
+                    <input type="radio" name="severity" value="Normal" checked />
+                    <span>🟢 Normal Priority</span>
+                  </label>
+                  <label class="severity-pill-label urgent">
+                    <input type="radio" name="severity" value="High" />
+                    <span>🟡 Urgent</span>
+                  </label>
+                  <label class="severity-pill-label critical">
+                    <input type="radio" name="severity" value="Critical" />
+                    <span>🔴 Critical Hazard</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Reporter Contact Details -->
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="reporter-name">
+                    <span>Your Full Name <span class="required">*</span></span>
+                  </label>
+                  <input type="text" class="form-control" id="reporter-name" placeholder="e.g. Ramesh Kumar" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="reporter-phone">
+                    <span>Phone Number <span class="required">*</span></span>
+                  </label>
+                  <input type="tel" class="form-control" id="reporter-phone" placeholder="10-digit mobile number" pattern="[0-9]{10}" maxlength="10" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="reporter-email">
+                  <span>Email Address</span>
+                  <span class="optional">(Optional - for resolution updates)</span>
+                </label>
+                <input type="email" class="form-control" id="reporter-email" placeholder="e.g. citizen@example.com" />
+              </div>
+
+              <!-- Photo Upload Area with Canvas Compression -->
+              <div class="form-group">
+                <label class="form-label">
+                  <span>Upload Evidence Photo</span>
+                  <span class="optional">JPG, PNG, WEBP (Auto-compressed)</span>
+                </label>
+
+                <div class="upload-dropzone" id="photo-dropzone">
+                  <input type="file" id="photo-file-input" accept="image/*" />
+                  <div class="dropzone-icon">📸</div>
+                  <div class="dropzone-text">Click or drag & drop photo here</div>
+                  <div class="dropzone-hint">Photos help sanitation squads identify the spot quickly</div>
+                </div>
+
+                <!-- Preview Thumbnail Box -->
+                <div class="image-preview-wrapper" id="image-preview-box">
+                  <img id="preview-img" src="" alt="Report photo preview" />
+                  <button type="button" class="btn-remove-preview" id="btn-remove-photo" title="Remove photo">✕</button>
+                </div>
+              </div>
+
+              <!-- Submit Actions -->
+              <div class="form-submit-actions">
+                <button type="submit" class="btn-submit-report" id="btn-submit-report">
+                  <span>🚀</span> Submit Cleanliness Report
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 3: SUCCESS / THANK YOU PAGE
+         ====================================================================== -->
+    <section id="view-success" class="view-section">
+      <div class="container">
+        <div class="success-card">
+          <div class="success-check-badge">✓</div>
+          <h2 class="success-title">Thank You, Citizen!</h2>
+          <p class="success-subtitle">
+            Your public cleanliness complaint has been registered with your local municipal sanitation department.
+          </p>
+
+          <div class="report-id-box">
+            <div>
+              <div class="report-id-label">Official Complaint Reference Number</div>
+              <div class="report-id-code" id="success-code-text">PCR-2026-XXXXX</div>
+            </div>
+            <button type="button" class="btn-copy-id" id="btn-copy-report-id">
+              <span>📋</span> Copy ID
+            </button>
+          </div>
+
+          <div class="success-details-list" id="success-details-content">
+            <!-- Filled dynamically -->
+          </div>
+
+          <div class="success-actions">
+            <button type="button" class="btn-hero-primary" onclick="navigateToView('reports')" style="font-size: 0.95rem; padding: 12px 24px;">
+              <span>📋</span> View In Public Reports Feed
+            </button>
+            <button type="button" class="btn-back" id="btn-print-receipt">
+              <span>🖨️</span> Print / Save Receipt
+            </button>
+            <button type="button" class="btn-change-loc" onclick="startFreshReport()" style="padding: 10px 18px;">
+              <span>➕</span> Report Another Issue
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 4: VIEW REPORTS PAGE (Public Transparency Portal)
+         ====================================================================== -->
+    <section id="view-reports" class="view-section">
+      <div class="container reports-page-wrapper">
+        <div class="section-header" style="text-align: left; margin-bottom: 2rem;">
+          <div class="section-kicker">Public Transparency Portal</div>
+          <h2 class="section-title">Community Cleanliness Reports</h2>
+          <p class="section-subtitle">
+            Browse live complaints filed across states, districts, and villages. Filter by status, problem category, or location.
+          </p>
+        </div>
+
+        <!-- Filter Controls Card -->
+        <div class="filter-card">
+          <div class="filter-grid">
+            <!-- Search Keyword -->
+            <div class="search-box-wrapper" style="min-width: 100%;">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="reports-search-input" placeholder="Search by Report ID, Village, or Keyword..." />
+            </div>
+
+            <!-- State Filter -->
+            <select class="filter-select" id="filter-report-state">
+              <option value="all">All States</option>
+            </select>
+
+            <!-- District Filter -->
+            <select class="filter-select" id="filter-report-district">
+              <option value="all">All Districts</option>
+            </select>
+
+            <!-- Problem Filter -->
+            <select class="filter-select" id="filter-report-problem">
+              <option value="all">All Problems</option>
+            </select>
+          </div>
+
+          <!-- Status Tabs -->
+          <div style="margin-top: 1.25rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+            <div class="status-tabs">
+              <button class="status-tab-btn active" data-status="all">All Reports</button>
+              <button class="status-tab-btn pending" data-status="pending">🟡 Pending</button>
+              <button class="status-tab-btn progress" data-status="in-progress">🔵 In Progress</button>
+              <button class="status-tab-btn resolved" data-status="resolved">🟢 Resolved</button>
+            </div>
+
+            <button class="btn-change-loc" onclick="resetReportFilters()" style="font-size: 0.8rem;">
+              ✕ Clear All Filters
+            </button>
+          </div>
+        </div>
+
+        <!-- Count Banner -->
+        <div class="reports-count-banner">
+          <div class="reports-count-text" id="reports-count-badge">
+            Showing <strong>0</strong> public reports
+          </div>
+          <button class="btn-hero-primary" data-nav-target="wizard-start" style="padding: 8px 18px; font-size: 0.88rem;">
+            <span>➕</span> File New Report
+          </button>
+        </div>
+
+        <!-- Reports Cards Grid -->
+        <div class="reports-grid" id="reports-cards-container">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         VIEW 5: ADMIN MANAGEMENT PANEL (Municipal Officers Dashboard)
+         ====================================================================== -->
+    <section id="view-admin" class="view-section">
+      <div class="container admin-wrapper">
+
+        <!-- Admin Auth Shield (Login Modal/Card) -->
+        <div id="admin-auth-shield" class="admin-auth-card">
+          <div class="admin-auth-icon">🛡️</div>
+          <h2 style="font-size: 1.75rem; margin-bottom: 0.5rem;">Sanitation Officer Portal</h2>
+          <p style="color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.75rem;">
+            Administrative access for municipal authorities and ward sanitation supervisors.
+          </p>
+
+          <form id="admin-login-form">
+            <div class="form-group" style="text-align: left;">
+              <label class="form-label" for="admin-pin-input">
+                <span>Security PIN / Passcode</span>
+                <span class="optional">Default: <code>admin123</code></span>
+              </label>
+              <input type="password" class="form-control" id="admin-pin-input" placeholder="Enter PIN (admin123)" required />
+            </div>
+
+            <button type="submit" class="btn-submit-report" style="width: 100%; margin-bottom: 1rem;">
+              Unlock Admin Dashboard
+            </button>
+
+            <button type="button" class="btn-back" id="btn-quick-admin-demo" style="width: 100%; justify-content: center;">
+              ⚡ One-Click Demo Access
+            </button>
+          </form>
+        </div>
+
+        <!-- Admin Dashboard View (When Authenticated) -->
+        <div id="admin-dashboard-view" style="display: none;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 2rem;">
+            <div>
+              <div class="section-kicker">Municipal Control Room</div>
+              <h2 style="font-size: 1.85rem;">Sanitation Operations Console</h2>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <button class="btn-change-loc" id="btn-export-csv" style="padding: 8px 16px;">
+                📥 Export CSV
+              </button>
+              <button class="btn-change-loc" id="btn-reset-demo-data" style="padding: 8px 16px; color: #dc2626; border-color: #fecaca;">
+                🔄 Reset Demo Data
+              </button>
+              <button class="btn-back" id="btn-admin-logout">
+                🚪 Logout
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI Cards Grid -->
+          <div class="admin-stats-grid">
+            <div class="admin-kpi-card">
+              <div class="kpi-icon-pill total">📊</div>
+              <div>
+                <div class="kpi-value" id="kpi-total-reports">0</div>
+                <div class="kpi-label">Total Reports</div>
+              </div>
+            </div>
+
+            <div class="admin-kpi-card">
+              <div class="kpi-icon-pill pending">🟡</div>
+              <div>
+                <div class="kpi-value" id="kpi-pending-reports" style="color: var(--status-pending);">0</div>
+                <div class="kpi-label">Pending Verification</div>
+              </div>
+            </div>
+
+            <div class="admin-kpi-card">
+              <div class="kpi-icon-pill progress">⚡</div>
+              <div>
+                <div class="kpi-value" id="kpi-progress-reports" style="color: var(--status-progress);">0</div>
+                <div class="kpi-label">In Progress</div>
+              </div>
+            </div>
+
+            <div class="admin-kpi-card">
+              <div class="kpi-icon-pill resolved">✓</div>
+              <div>
+                <div class="kpi-value" id="kpi-resolved-reports" style="color: var(--status-resolved);">0</div>
+                <div class="kpi-label">Resolved Cleanups</div>
+              </div>
+            </div>
+
+            <div class="admin-kpi-card">
+              <div class="kpi-icon-pill total" style="background: #ecfdf5; color: #047857;">📈</div>
+              <div>
+                <div class="kpi-value" id="kpi-resolution-rate" style="color: #047857;">0%</div>
+                <div class="kpi-label">Resolution Rate</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reports Management Table -->
+          <div class="admin-table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Report ID</th>
+                  <th>Date</th>
+                  <th>Location</th>
+                  <th>Problem Category</th>
+                  <th>Status</th>
+                  <th>Reporter</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-table-tbody">
+                <!-- Injected via app.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       INSPECTION MODAL DIALOG
+       ========================================================================== -->
+  <div class="modal-backdrop" id="report-modal-backdrop">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 style="font-size: 1.25rem;">Complaint Inspection</h3>
+        <button class="modal-close-btn" onclick="closeReportDetailModal()" aria-label="Close modal">✕</button>
+      </div>
+      <div class="modal-body" id="report-modal-body">
+        <!-- Filled dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span style="font-size: 1.4rem;">🌱</span>
+          <span>Public Cleanliness Reporter</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="#landing" onclick="navigateToView('landing')">Home</a></li>
+          <li><a href="#wizard" data-nav-target="wizard-start">Report Problem</a></li>
+          <li><a href="#reports" onclick="navigateToView('reports')">Public Reports</a></li>
+          <li><a href="#admin" onclick="navigateToView('admin')">Admin Console</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p>PBL Mini Project — Built with semantic HTML, modern CSS & vanilla JavaScript. Powered by citizen participation.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
